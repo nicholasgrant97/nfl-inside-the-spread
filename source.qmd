@@ -3,4 +3,4 @@ title: "Source"
 ---
 
 
-[Data source](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data)
+Data Souce: [NFL scores and betting data](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data)

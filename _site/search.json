@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "My name is Nicholas Grant. You can reach me at nicholas.grant97@gmail.com\nThis project was created in conjunction with Kane’s Free Data Science Bootcamp."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NFL Spread: 1978-2013",
+    "section": "",
+    "text": "stan_glm\n family:       gaussian [identity]\n formula:      score_line ~ betting_line\n observations: 8430\n predictors:   2\n------\n             Median MAD_SD\n(Intercept)  0.3    0.2   \nbetting_line 1.0    0.0   \n\nAuxiliary parameter(s):\n      Median MAD_SD\nsigma 13.4    0.1  \n\n------\n* For help interpreting the printed output see ?print.stanreg\n* For info on the priors used see ?prior_summary.stanreg"
+  },
+  {
+    "objectID": "source.html",
+    "href": "source.html",
+    "title": "Source",
+    "section": "",
+    "text": "Data source"
+  }
+]
