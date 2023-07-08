@@ -1,0 +1,6 @@
+---
+title: "Source"
+---
+
+
+[Data source](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data)

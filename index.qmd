@@ -1,0 +1,45 @@
+---
+title: "NFL Spread: 1978-2013"
+author: "Nicholas Grant"
+format: html
+editor: visual
+execute: 
+  echo: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+library(rstanarm)
+```
+
+```{r}
+# Data files
+list_of_files <- list.files(path = "data",
+                            recursive = TRUE,
+                            pattern = "\\.csv$",
+                            full.names = TRUE)  
+```
+
+```{r}
+# Import data
+x <- read_csv(list_of_files, id = "file_name", show_col_types = FALSE) |> 
+  janitor::clean_names() |> 
+  mutate(date = as.Date(date, "%m/%d/%Y"),
+         betting_line = line) |> 
+  mutate(score_line = home_score - visitor_score) |> 
+  mutate(diff_line = abs(score_line - betting_line)) |> 
+  select(- total_line)
+```
+
+```{r}
+# Create object
+obj_fit <- stan_glm(data = x,
+         formula = score_line ~ betting_line,
+         family = gaussian,
+         refresh = 0,
+         seed = 9)
+
+obj_fit
+```
+
