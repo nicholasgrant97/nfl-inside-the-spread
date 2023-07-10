@@ -2,5 +2,10 @@
 title: "Source"
 ---
 
+# Dataset
 
-Data Souce: [NFL scores and betting data](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data)
+Spreadspoke (2022, November). [NFL scores and betting data](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data), Version February 2023. Retrieved June 26, 2023.
+
+# Data Imported
+
+CSV files with the title suffix “lines.csv” from the dataset were extracted for use in this project, which covers NFL regular season games from 1978 through 2013. The data files were imported and cleansed for analysis using the tidyverse library (readr/dplyr) and the janitor::clean_names() function in R. 

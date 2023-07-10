@@ -4,20 +4,76 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "My name is Nicholas Grant. You can reach me at nicholas.grant97@gmail.com\nThis project was created in conjunction with Kane’s Free Data Science Bootcamp."
+    "text": "My name is Nicholas Grant and I am exploring data science as a field of interest. You can reach me at nicholas.grant97@gmail.com"
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "About",
+    "section": "",
+    "text": "My name is Nicholas Grant and I am exploring data science as a field of interest. You can reach me at nicholas.grant97@gmail.com"
+  },
+  {
+    "objectID": "about.html#about-this-project",
+    "href": "about.html#about-this-project",
+    "title": "About",
+    "section": "About this Project",
+    "text": "About this Project\nThis project explores the probable mean margin of victory (points differential) in NFL regular season games from 1978 through 2013. The point spread (betting line) are highlighted in 4 plots to highlight the probable distribution of the mean margin of victory.\nClick here to access project GitHub repository.\nProject was created in conjunction with Kane’s Free Data Science Bootcamp."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "NFL Spread: 1978-2013",
+    "title": "NFL Point Spread: 1978-2013",
     "section": "",
-    "text": "stan_glm\n family:       gaussian [identity]\n formula:      score_line ~ betting_line\n observations: 8430\n predictors:   2\n------\n             Median MAD_SD\n(Intercept)  0.3    0.2   \nbetting_line 1.0    0.0   \n\nAuxiliary parameter(s):\n      Median MAD_SD\nsigma 13.4    0.1  \n\n------\n* For help interpreting the printed output see ?print.stanreg\n* For info on the priors used see ?prior_summary.stanreg"
+    "text": "NFL point spread is a major focus point for those looking to place wagers on the upcoming weekly games during the football season.\nThe data downloaded from Kaggle: NFL scores and betting data, contained an array of variables nested in a series of individual csv and xml files. This project’s sole focus centered around point spread. Therefore, only csv files with the title suffix “lines.csv” from the dataset were extracted for use.\nAfter importing the data using the read_csv() function, the immediate efforts were centered on tidying the data using a number of functions - janitor::clean_names() to generate compatible variable names, mutate() to add columns, select() to focus on the variables of interest, and the rename() to rename variables.\nA Bayesian regression model was generated, with margin of victory as the dependent variable and point spread (absolute) as the independent variable.\nThe plots generated from the Bayesian linear model highlight an increasing probable mean margin of victory as the point spread increases, which makes sense since those matchups are often a case of a superior opponent versus an inferior opponent. When the spread is greater than 7 points, the average margin of victory is in the neighborhood of 16 points. Overall, most games are decided by double digits.\nWhat is the expected mean margin of victory?"
+  },
+  {
+    "objectID": "models.html",
+    "href": "models.html",
+    "title": "Models",
+    "section": "",
+    "text": "Generalized Bayesian linear model was used to determine the coefficients, intercept, and auxiliary parameters."
+  },
+  {
+    "objectID": "models.html#model-definition",
+    "href": "models.html#model-definition",
+    "title": "Models",
+    "section": "",
+    "text": "Generalized Bayesian linear model was used to determine the coefficients, intercept, and auxiliary parameters."
+  },
+  {
+    "objectID": "plot _0-3.html",
+    "href": "plot _0-3.html",
+    "title": "Point Spread: 0.0 to 3.0 points",
+    "section": "",
+    "text": "What is the expected mean margin of victory?"
+  },
+  {
+    "objectID": "plot _3.5-4.5.html",
+    "href": "plot _3.5-4.5.html",
+    "title": "Point Spread: 3.5 to 4.5 points",
+    "section": "",
+    "text": "What is the expected mean margin of victory?"
+  },
+  {
+    "objectID": "plot _5-7.html",
+    "href": "plot _5-7.html",
+    "title": "Point Spread: 5.0 to 7.0 points",
+    "section": "",
+    "text": "What is the expected mean margin of victory?"
+  },
+  {
+    "objectID": "plot _7_plus.html",
+    "href": "plot _7_plus.html",
+    "title": "Point Spread: 7.5+ points",
+    "section": "",
+    "text": "What is the expected mean margin of victory?"
   },
   {
     "objectID": "source.html",
     "href": "source.html",
     "title": "Source",
     "section": "",
-    "text": "Data source"
+    "text": "Dataset\nSpreadspoke (2022, November). NFL scores and betting data, Version February 2023. Retrieved June 26, 2023.\n\n\nData Imported\nCSV files with the title suffix “lines.csv” from the dataset were extracted for use in this project, which covers NFL regular season games from 1978 through 2013. The data files were imported and cleansed for analysis using the tidyverse library (readr/dplyr) and the janitor::clean_names() function in R."
   }
 ]

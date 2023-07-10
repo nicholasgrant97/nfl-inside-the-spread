@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NFL Spread: 1978-2013 - Source</title>
+<title>NFL Spread: 1978-2013 - Point Spread: 7.5+ points</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Models</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./source.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./source.html" rel="" target="">
  <span class="menu-text">Source</span></a>
   </li>  
 </ul>
@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Source</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./plot _7_plus.html">Point Spread: 7.5+ points</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -140,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plot _7_plus.html" class="sidebar-item-text sidebar-link">
+  <a href="./plot _7_plus.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Point Spread: 7.5+ points</span></a>
   </div>
 </li>
@@ -150,21 +150,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#data-imported" id="toc-data-imported" class="nav-link" data-scroll-target="#data-imported">Data Imported</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Source</h1>
+<h1 class="title">Point Spread: 7.5+ points</h1>
 </div>
 
 
@@ -179,16 +172,14 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="dataset" class="level1">
-<h1>Dataset</h1>
-<p>Spreadspoke (2022, November). <a href="https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data">NFL scores and betting data</a>, Version February 2023. Retrieved June 26, 2023.</p>
-</section>
-<section id="data-imported" class="level1">
-<h1>Data Imported</h1>
-<p>CSV files with the title suffix “lines.csv” from the dataset were extracted for use in this project, which covers NFL regular season games from 1978 through 2013. The data files were imported and cleansed for analysis using the tidyverse library (readr/dplyr) and the janitor::clean_names() function in R.</p>
+<p>What is the expected mean margin of victory?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="plot-_7_plus_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

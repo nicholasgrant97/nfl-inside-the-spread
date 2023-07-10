@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nicholas Grant">
 
-<title>nfl-inside-the-spread - NFL Spread: 1978-2013</title>
+<title>NFL Spread: 1978-2013 - NFL Point Spread: 1978-2013</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -73,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">nfl-inside-the-spread</span>
+    <span class="navbar-title">NFL Spread: 1978-2013</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -90,16 +89,65 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./models.html" rel="" target="">
+ <span class="menu-text">Models</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./source.html" rel="" target="">
+ <span class="menu-text">Source</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NFL Point Spread: 1978-2013</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plot _0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point Spread: 0.0 to 3.0 points</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plot _3.5-4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point Spread: 3.5 to 4.5 points</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plot _5-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point Spread: 5.0 to 7.0 points</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plot _7_plus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point Spread: 7.5+ points</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -109,19 +157,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">NFL Spread: 1978-2013</h1>
+<h1 class="title">NFL Point Spread: 1978-2013</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicholas Grant </p>
-          </div>
-  </div>
     
   
     
@@ -130,25 +172,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>NFL point spread is a major focus point for those looking to place wagers on the upcoming weekly games during the football season.</p>
+<p>The data downloaded from Kaggle: NFL scores and betting data, contained an array of variables nested in a series of individual csv and xml files. This project’s sole focus centered around point spread. Therefore, only csv files with the title suffix “lines.csv” from the dataset were extracted for use.</p>
+<p>After importing the data using the read_csv() function, the immediate efforts were centered on tidying the data using a number of functions - janitor::clean_names() to generate compatible variable names, mutate() to add columns, select() to focus on the variables of interest, and the rename() to rename variables.</p>
+<p>A Bayesian regression model was generated, with margin of victory as the dependent variable and point spread (absolute) as the independent variable.</p>
+<p>The plots generated from the Bayesian linear model highlight an increasing probable mean margin of victory as the point spread increases, which makes sense since those matchups are often a case of a superior opponent versus an inferior opponent. When the spread is greater than 7 points, the average margin of victory is in the neighborhood of 16 points. Overall, most games are decided by double digits.</p>
+<p>What is the expected mean margin of victory?</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>stan_glm
- family:       gaussian [identity]
- formula:      score_line ~ betting_line
- observations: 8430
- predictors:   2
-------
-             Median MAD_SD
-(Intercept)  0.3    0.2   
-betting_line 1.0    0.0   
-
-Auxiliary parameter(s):
-      Median MAD_SD
-sigma 13.4    0.1  
-
-------
-* For help interpreting the printed output see ?print.stanreg
-* For info on the priors used see ?prior_summary.stanreg</code></pre>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

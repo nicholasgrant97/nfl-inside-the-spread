@@ -2,12 +2,27 @@ project:
   type: website
 
 website:
-  title: "nfl-inside-the-spread"
+  title: "NFL Spread: 1978-2013"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - models.qmd
+      - source.qmd
+      
+  sidebar:
+    - id: Plots
+      title: "Plots"
+      style: "floating"
+      background: "#ffffff"
+      collapse-level: 3
+      contents:
+        - plot _0-3.qmd
+        - plot _3.5-4.5.qmd
+        - plot _5-7.qmd
+        - plot _7_plus.qmd
+    
 
 format:
   html:

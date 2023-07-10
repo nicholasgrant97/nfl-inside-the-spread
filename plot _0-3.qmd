@@ -1,0 +1,86 @@
+---
+title: "Point Spread: 0.0 to 3.0 points"
+format: html
+editor: visual
+execute: 
+  echo: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+library(rstanarm)
+library(patchwork)
+```
+
+```{r}
+# Data files
+list_of_files <- list.files(path = "data",
+                            recursive = TRUE,
+                            pattern = "\\.csv$",
+                            full.names = TRUE)  
+```
+
+```{r}
+# Import data
+x <- read_csv(list_of_files, id = "file_name", show_col_types = FALSE) |> 
+  janitor::clean_names() |> 
+  mutate(date = as.Date(date, "%m/%d/%Y"),
+         betting_line = line) |> 
+  mutate(victory_margin = abs(home_score - visitor_score)) |> 
+  mutate(abs_betting_line = abs(betting_line), abs_victory_margin = abs(victory_margin)) |> 
+  select(date, home_team, visitor, home_score, visitor_score, betting_line, abs_betting_line, victory_margin) |> 
+  rename(home = home_team)
+```
+
+```{r}
+# summary(x)
+```
+
+```{r}
+# Model
+obj_fit <- stan_glm(data = x,
+         formula = victory_margin ~ abs_betting_line,
+         family = gaussian,
+         refresh = 0,
+         seed = 9)
+```
+
+What is the expected mean margin of victory?
+
+```{r}
+# when the spread is less than or equal to 3 points
+obs_0_3 <- tibble(abs_betting_line = seq(0, 3, 0.5))
+```
+
+```{r}
+
+pp_0_3 <- posterior_epred(object = obj_fit, newdata = obs_0_3) |> 
+  as_tibble() |> 
+  rowwise() |> 
+  mutate(avg_diff_point_0_3 = mean(c_across(`1`:`7`)))
+#pp_0_3
+```
+
+```{r}
+plot1 <- pp_0_3 |> 
+  ggplot(aes(x = avg_diff_point_0_3)) +
+    geom_histogram(aes(y = after_stat(count/sum(count))),
+                   bins = 100) +
+    labs(title = "Posterior for Expected mean NFL Margin of Victory when Absolute Point Spread \nis between 0 and 3 points",
+         subtitle = "",
+         x = "Margin of Victory (Points)",
+         y = "Probability",
+         caption = "Kaggle: NFL scores and betting data") +
+    scale_x_continuous(labels = scales::number_format()) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+    theme_classic()
+```
+
+```{r}
+plot1
+```
+
+```{r}
+# This project explores the probable mean margin of victory (points differential) in NFL regular season games from 1978 through 2013. The point spread (betting line) quartiles are highlighted in 4 plots to highlight the probable distribution of the mean margin of victory.
+```
