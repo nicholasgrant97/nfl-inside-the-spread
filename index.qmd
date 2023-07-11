@@ -11,7 +11,7 @@ NFL point spread is a major focus point for those looking to place wagers on the
 
 The data downloaded from Kaggle: NFL scores and betting data, contained an array of variables nested in a series of individual csv and xml files. This project's sole focus centered around point spread. Therefore, only csv files with the title suffix "lines.csv" from the dataset were extracted for use.
 
-After importing the data using the read_csv() function, the immediate efforts were centered on tidying the data using a number of functions - janitor::clean_names() to generate compatible variable names, mutate() to add columns, select() to focus on the variables of interest, and the rename() to rename variables.
+After importing the data using the read_csv() function, the immediate efforts were centered on tidying the data using a number of functions - janitor::clean_names() to generate compatible variable names, mutate() to add columns, select() to focus on the variables of interest, and rename() to rename variables.
 
 A Bayesian regression model was generated, with margin of victory as the dependent variable and point spread (absolute) as the independent variable.
 

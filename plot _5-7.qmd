@@ -80,7 +80,3 @@ plot3 <- pp_5_7 |>
 ```{r}
 plot3
 ```
-
-```{r}
-# This project explores the probable mean margin of victory (points differential) in NFL regular season games from 1978 through 2013. The point spread (betting line) quartiles are highlighted in 4 plots to highlight the probable distribution of the mean margin of victory.
-```
