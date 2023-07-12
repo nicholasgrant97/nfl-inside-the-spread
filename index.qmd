@@ -1,10 +1,11 @@
 ---
 title: "NFL Point Spread: 1978-2013"
 format: html
-editor: visual
+editor: source
 execute: 
   echo: false
   warning: false
+  message: false
 ---
 
 NFL point spread is a major focus point for those looking to place wagers on the upcoming weekly games during the football season.
@@ -13,14 +14,13 @@ The data downloaded from Kaggle: NFL scores and betting data, contained an array
 
 After importing the data using the read_csv() function, the immediate efforts were centered on tidying the data using a number of functions - janitor::clean_names() to generate compatible variable names, mutate() to add columns, select() to focus on the variables of interest, and rename() to rename variables.
 
-A Bayesian regression model was generated, with margin of victory as the dependent variable and point spread (absolute) as the independent variable.
+A Bayesian regression model using the [stan_glm()](https://mc-stan.org/rstanarm/reference/stan_glm.html) function was generated, where  the dependent variable is margin of victory and the independent variable is point spread (absolute).
 
-The plots generated from the Bayesian linear model highlight an increasing probable mean margin of victory as the point spread increases, which makes sense since those matchups are often a case of a superior opponent versus an inferior opponent. When the spread is greater than 7 points, the average margin of victory is in the neighborhood of 16 points. Overall, most games are decided by double digits.
+The plots generated from the Bayesian linear model highlight an increasing probable mean margin of victory as the point spread increases, which makes sense since those matchups are often the case of a far superior opponent versus an inferior opponent. On average when the spread is greater than 7 points, the mean margin of victory is in the neighborhood of 16 points. Overall, most games are decided by double digits.
 
 ```{r}
 library(tidyverse)
 library(rstanarm)
-library(patchwork)
 ```
 
 ```{r}
@@ -35,11 +35,11 @@ list_of_files <- list.files(path = "data",
 # Import data
 x <- read_csv(list_of_files, id = "file_name", show_col_types = FALSE) |> 
   janitor::clean_names() |> 
+  drop_na() |>
   mutate(date = as.Date(date, "%m/%d/%Y"),
-         betting_line = line) |> 
+         spread = abs(line)) |> 
   mutate(victory_margin = abs(home_score - visitor_score)) |> 
-  mutate(abs_betting_line = abs(betting_line), abs_victory_margin = abs(victory_margin)) |> 
-  select(date, home_team, visitor, home_score, visitor_score, betting_line, abs_betting_line, victory_margin) |> 
+  select(date, home_team, visitor, home_score, visitor_score, line, spread, victory_margin) |> 
   rename(home = home_team)
 ```
 
@@ -50,7 +50,7 @@ x <- read_csv(list_of_files, id = "file_name", show_col_types = FALSE) |>
 ```{r}
 # Model
 obj_fit <- stan_glm(data = x,
-         formula = victory_margin ~ abs_betting_line,
+         formula = victory_margin ~ spread,
          family = gaussian,
          refresh = 0,
          seed = 9)
@@ -59,96 +59,8 @@ obj_fit <- stan_glm(data = x,
 What is the expected mean margin of victory?
 
 ```{r}
-# when the spread is less than or equal to 3 points
-#obs_0_3 <- tibble(abs_betting_line = seq(0, 3, 0.5))
-```
-
-```{r}
-
-# pp_0_3 <- posterior_epred(object = obj_fit, newdata = obs_0_3) |> 
-#   as_tibble() |> 
-#   rowwise() |> 
-#   mutate(avg_diff_point_0_3 = mean(c_across(`1`:`7`)))
-#pp_0_3
-```
-
-```{r}
-# plot1 <- pp_0_3 |> 
-#   ggplot(aes(x = avg_diff_point_0_3)) +
-#     geom_histogram(aes(y = after_stat(count/sum(count))),
-#                    bins = 100) +
-#     labs(title = "Posterior for Expected mean NFL Margin of Victory when Point Spread \nis between 0 and 3 points",
-#          subtitle = "",
-#          x = "Margin of Victory (Points)",
-#          y = "Probability",
-#          caption = "Kaggle: NFL scores and betting data") +
-#     scale_x_continuous(labels = scales::number_format()) +
-#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-#     theme_classic()
-```
-
-```{r}
-# when the spread is between 3.5 and 4.5 points
-# obs_3.5_4.5 <- tibble(abs_betting_line = seq(3.5, 4.5, 0.5))
-```
-
-```{r}
-# when the spread is between 3.5 and 4.5 points
-# pp_3.5_4.5 <- posterior_epred(object = obj_fit, newdata = obs_3.5_4.5) |> 
-#   as_tibble() |> 
-#   rowwise() |> 
-#   mutate(avg_diff_point_3.5_4.5 = mean(c_across(`1`:`3`)))
-
-```
-
-```{r}
-# when the spread is between 3.5 and 4.5 points
-# plot2 <- pp_3.5_4.5 |> 
-#   ggplot(aes(x = avg_diff_point_3.5_4.5)) +
-#     geom_histogram(aes(y = after_stat(count/sum(count))),
-#                    bins = 100) +
-#     labs(title = "Posterior for Expected mean NFL Margin of Victory when Point Spread \nis between 3.5 and 4.5 points",
-#          subtitle = "",
-#          x = "Margin of Victory (points)",
-#          y = "Probability",
-#          caption = "Kaggle: NFL scores and betting data") +
-#     scale_x_continuous(labels = scales::number_format()) +
-#     scale_y_continuous(labels = scales::percent_format(accuracy = 1))  +
-#     theme_classic()
-```
-
-```{r}
-# when the spread is between 5 and 7 points
-# obs_5_7 <- tibble(abs_betting_line = seq(5, 7, 0.5))
-```
-
-```{r}
-# when the spread is between 5 and 7 points
-# pp_5_7 <- posterior_epred(object = obj_fit, newdata = obs_5_7 ) |> 
-#   as_tibble() |> 
-#   rowwise() |> 
-#   mutate(avg_diff_point_5_7 = mean(c_across(`1`:`3`)))
-```
-
-```{r}
-# when the spread is between 5 and 7 points
-# plot3 <- pp_5_7 |> 
-#   ggplot(aes(x = avg_diff_point_5_7)) +
-#     geom_histogram(aes(y = after_stat(count/sum(count))),
-#                    bins = 100) +
-#     labs(title = "Posterior for Expected mean NFL Margin of Victory when Point Spread \nis between 5 and 7 points",
-#          subtitle = "",
-#          x = "Margin of Victory (points)",
-#          y = "Probability",
-#          caption = "Kaggle: NFL scores and betting data") +
-#     scale_x_continuous(labels = scales::number_format()) +
-#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-#     theme_classic()
-```
-
-```{r}
 # when the spread is Greater than 7 points
-obs_7.5 <- tibble(abs_betting_line = seq(7.5,26.5, 0.5))
+obs_7.5 <- tibble(spread = seq(7.5,26.5, 0.5))
 ```
 
 ```{r}
@@ -169,7 +81,7 @@ plot4 <- pp_7.5 |>
          subtitle = "",
          x = "Margin of Victory (points)",
          y = "Probability",
-         caption = "Kaggle: NFL scores and betting data") +
+         caption = "Source: Kaggle (NFL scores and betting data)") +
     scale_x_continuous(labels = scales::number_format()) +
     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     theme_classic()

@@ -16,7 +16,7 @@ website:
       title: "Plots"
       style: "floating"
       background: "#ffffff"
-      collapse-level: 3
+      collapse-level: 4
       contents:
         - plot _0-3.qmd
         - plot _3.5-4.5.qmd
@@ -26,7 +26,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    color: #11C1FF
     css: styles.css
     toc: true
 

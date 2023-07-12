@@ -1,7 +1,52 @@
 ---
 title: "Models"
+editor: source
+execute: 
+  echo: false
+  warning: false
+  message: false
 ---
 
 ## Model Definition
 
-Generalized Bayesian linear model was used to determine the coefficients, intercept, and auxiliary parameters.
+A generalized Bayesian linear model using the [stan_glm()](https://mc-stan.org/rstanarm/reference/stan_glm.html) function was used, where the dependent variable is the margin of victory and the independent variable is the point spread (absolute).
+
+```{r}
+library(tidyverse)
+library(rstanarm)
+```
+
+```{r}
+# Data files
+list_of_files <- list.files(path = "data",
+                            recursive = TRUE,
+                            pattern = "\\.csv$",
+                            full.names = TRUE)  
+```
+
+```{r}
+# Import data
+x <- read_csv(list_of_files, id = "file_name", show_col_types = FALSE) |> 
+  janitor::clean_names() |> 
+  drop_na() |>
+  mutate(date = as.Date(date, "%m/%d/%Y"),
+         spread = abs(line)) |> 
+  mutate(victory_margin = abs(home_score - visitor_score)) |> 
+  select(date, home_team, visitor, home_score, visitor_score, line, spread, victory_margin) |> 
+  rename(home = home_team)
+```
+
+```{r}
+# Model
+obj_fit <- stan_glm(data = x,
+         formula = victory_margin ~ spread,
+         family = gaussian,
+         refresh = 0,
+         seed = 9)
+```
+
+
+```{r}
+gtsummary::tbl_regression(obj_fit)
+```
+
