@@ -8,6 +8,6 @@ My name is [Nicholas Grant](https://github.com/nicholasgrant97) and I am explori
 
 ## About this Project
 
-This [project](https://github.com/nicholasgrant97/nfl-inside-the-spread) explores the probable mean margin of victory (points differential) in NFL regular season games from 1978 through 2013. The point spread (betting line) are highlighted in 4 plots to highlight the probable distribution of the mean margin of victory. 
+This [project](https://github.com/nicholasgrant97/nfl-inside-the-spread) explores the probable mean margin of victory (points differential) in the NFL (National Football League) regular season games from 1978 through 2013. The point spread (betting line) are highlighted in 4 plots to highlight the probable distribution of the mean margin of victory. 
 
 This Project was created in conjunction with [Kane’s Free Data Science Bootcamp](https://bootcamp.davidkane.info/).

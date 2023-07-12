@@ -9,7 +9,12 @@ execute:
 
 ## Model Definition
 
-A generalized Bayesian linear model using the [stan_glm()](https://mc-stan.org/rstanarm/reference/stan_glm.html) function was used, where the dependent variable is the margin of victory and the independent variable is the point spread (absolute).
+A generalized Bayesian linear model using the [stan_glm()](https://mc-stan.org/rstanarm/reference/stan_glm.html) function was used, where the dependent variable is the margin of victory and the independent variable is the point spread (absolute). This model was the byproduct of 8,206 observations.
+
+$$y_i = \beta_0  + \beta_1 x_{1,i} + \epsilon_i$$
+
+with $y = victory\_margin$, $x_1 = spread$, and $\epsilon_i \sim N(0, \sigma^2)$.
+
 
 ```{r}
 library(tidyverse)
